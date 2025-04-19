@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    {% for item in testObjects %}
+
+        <h3>{{item.title}}</h3>
+
+    {% endfor %}
+    
+{% endblock %}
