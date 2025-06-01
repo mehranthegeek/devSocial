@@ -13,8 +13,8 @@ class CustomUserRole(models.Model):
 class CustomUser(AbstractUser):
     role = models.ForeignKey(CustomUserRole, on_delete=models.SET_NULL, null=True , blank = True)
 
-    def is_superuser(self):
-        return self.role and self.role.name == 'superuser'
+    def has_superuser_role(self):
+        return self.role and self.role.role == 'superuser'
 
     def can_delete_posts(self):
         return self.role and self.role.name in ['superuser', 'moderator']
