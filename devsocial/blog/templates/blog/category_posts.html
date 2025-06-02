@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<h1>Posts in "{{ category.title }}"</h1>
+<ul class="list-group">
+    {% for post in page_obj %}
+        <li class="list-group-item">
+            <div class="row">
+                {% if post.image %}
+                <div class="col-md-3">
+                    <img src="{{ post.image.url }}" class="img-fluid rounded" style="max-height:150px;" alt="Post Image">
+                </div>
+                {% endif %}
+                <div class="{% if post.image %}col-md-9{% else %}col-12{% endif %}">
+                    <h2>
+                        <a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a>
+                    </h2>
+                    <p>By {{ post.author.username }} | {{ post.created_at }}</p>
+                    <p>{{ post.content|truncatewords:30 }}</p>
+                </div>
+            </div>
+        </li>
+    {% empty %}
+        <li class="list-group-item">No posts in this category.</li>
+    {% endfor %}
+</ul>
+<!-- Pagination here if needed -->
+{% endblock %}

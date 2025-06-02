@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block content %}
+
+{% if post.author == user or user.is_authenticated and user.role and user.role.role == 'staff'%}
+    <a href="{% url 'blog:delete_post' post.id %}" class="btn btn-danger">Delete</a>
+{% endif %}
+
+
+<h1>{{ post.title }}</h1>
+{% if post.image %}
+    <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="Post Image">
+{% endif %}
+<p>By {{ post.author.username }} | {{ post.created_at }}</p>
+<div>
+    {{ post.content }}
+</div>
+<a href="{% url 'blog:homepage' %}">Back to Homepage</a>
+{% endblock %}

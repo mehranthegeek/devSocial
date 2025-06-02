@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'blog:homepage' %}">Dev Social</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+          {% if user.is_authenticated %}
+            <li class="nav-item me-2">
+                <span class="navbar-text">
+                    Hey, <a href="{% url 'blog:profile' %}" class="fw-bold text-decoration-none">{{ user.username }}</a>
+                  </span>
+                  
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-danger" href="{% url 'accounts:logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item me-2">
+              <a class="btn btn-outline-primary" href="{% url 'accounts:login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary" href="{% url 'accounts:register' %}">Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
